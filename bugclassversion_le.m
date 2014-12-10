@@ -55,9 +55,9 @@ for k=1:length(tvec)
     
     [motorL, motorR] = brain(sensorL, sensorR, colorAll);
 
-    vel_left = motorL / 10;   % relate the left and right velocities to motor
+    vel_left = motorL / 40;   % relate the left and right velocities to motor
                                 % outputs
-    vel_right = motorR / 10;
+    vel_right = motorR / 40;
     
     heading_angle = heading_angle + atan(((vel_right - vel_left)) / 10); % update heading angle and x,y location of robot
     
@@ -93,7 +93,7 @@ for k=1:length(tvec)
     
     DL = sqrt((x - f_center(1)).^2 + (y - f_center(2)).^2);
     
-    if DL < 10 || k-last_food>100 % get new food after certain time, or after eating
+    if DL < 10 || k-last_food>300 % get new food after certain time, or after eating
         last_food = k; % Timer 
         tgt = [150*rand(1,2)-[75. 75.]]; % New food position
         food_lambda = (750-380)*rand() + 380; % New food color 
@@ -192,14 +192,12 @@ function [motorL, motorR] = brain(sensorL, sensorR, colorAll)
   
   % COWARD (uncomment for action); % coward if it detects red
   if(colorAll(6)>thresh)
-   motorL = 250 - sensorL; 
-   motorR = 250 - sensorR; 
+   motorL = 500 - sensorL; 
+   motorR = 500 - sensorR; 
    return
   end
   
   % AGGRESSOR
-  motorL = 250 - sensorR;   % compute a relationship of sensor input to motor output
-  motorR = 250 - sensorL;
+  motorL = 500 - sensorR;   % compute a relationship of sensor input to motor output
+  motorR = 500 - sensorL;
   
-
- 
