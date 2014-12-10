@@ -168,10 +168,10 @@ width(c) = 2; color(c,:) = [1 1 0]; c=c+1;
 function [motorL, motorR] = brain(sensorL, sensorR)
   
   % COWARD (uncomment for action)
-  motorL = 250 - sensorL
-  motorR = 250 - sensorR
+%   motorL = 250 - sensorL
+%   motorR = 250 - sensorR
   
   % AGGRESSOR
-  % motorL = 250 - sensorR;   % compute a relationship of sensor input to motor output
-  % motorR = 250 - sensorL;
+  motorL = 250 - sensorR;   % compute a relationship of sensor input to motor output
+  motorR = 250 - sensorL;
  
