@@ -1,6 +1,6 @@
 %This function is to make food with a random color at a 
-%random location. It converts a random wabelength to the 
-%corresponding RGB values and then creates a food particle
+%random location. It converts a random wavelength to the 
+%corresponding RGB value and then creates a food particle
 %with the color associated with that RGB value
 
 function [] = food()
