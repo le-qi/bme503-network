@@ -3,6 +3,7 @@ function r = f( lambda, lambda_pref, width_factor, max_rate)
 % width_factor: width of tuning curve
 % max_rate: max firing rate
 
+
 % Gaussian function
 a = max_rate; 
 b = lambda_pref; 
