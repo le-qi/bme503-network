@@ -32,8 +32,8 @@ ylim([-0.1 1.1])
 xlow = l; % linspace(0, 1, length(l)); 
 xhigh = [xlow(2:end) xlow(end)+1/length(l)]; 
 
-figure(1); 
-subplot(2, 1, 1)
+figure(1); clf
+%subplot(2, 1, 1)
 hold on 
 for i = 1:length(R)
     a = patch([xlow(i) xhigh(i) xhigh(i) xlow(i)], [0 0 1 1], [R(i), G(i), B(i)]); 

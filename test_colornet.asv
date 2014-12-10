@@ -28,7 +28,7 @@ plot(l_model, in_model(4, :), 'Color', [R G B] )
 axis tight
 xlabel '\lambda (nm)'
 ylabel 'Firing rate (Hz)'
-title('Input Layer', 'FontSize', 14); 
+title 'Input Layer'
 annotation('textbox', [0.8 0.8 0.1 0.1], 'String', ['\sigma = ' sprintf('%g', width_factor)])
 
 subplot(2, 1, 2);
@@ -57,9 +57,10 @@ for i = 1:length(color_ranges)-1
 end
 
 axis tight
-title('Output Layer', 'FontSize', 14); 
+title 'Output Layer'
 xlabel '\lambda (nm)'
 ylabel 'Output'
 hline(0.5, 'k:')
-annotation('textbox', [0.7 0.3 0.1 0.1], 'String', sprintf('Hidden neurons: %g', num_hidden_units))
+annotations('textbox', [0.8 0.8 0.1 0.1], 'String', sprintf('Hidden neurons: %g
+legend(['Number of hidden neurons:' sprintf(' %g', num_hidden_units)])
 
