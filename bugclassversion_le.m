@@ -22,9 +22,13 @@ tvec = t:DT:tstop;
 tgt = [150*rand(1,2)-[75. 75.]]; %food target location
 
 %Make Food
+food_lambda = (750-380)*rand() + 380; % food color
+[R, G, B] = wavelength_to_RGB(food_lambda); % for the purposes of drawing
+
+        
 f_center = tgt;
 f_width = 5;
-food = rectangle('Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5],'EdgeColor','w');
+food = rectangle('Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5],'EdgeColor',[R, G, B]);
 set(food,'Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5]);
 
 heading_angle=0;
@@ -39,14 +43,14 @@ yL = 5;
 
 % Compute the magnitude of the sensor info
 %    
-l = 700; % nm; test
-colorAll = color_sense(l); % single sensor; senses one value 
+colorAll = color_sense(food_lambda); % single sensor; senses one value 
 colorAll 
 
 sensorL = sqrt((xL - f_center(1)).^2 + (yL - f_center(2)).^2);
 sensorR = sqrt((xR - f_center(1)).^2 + (yR - f_center(2)).^2);
 draw_robot(x,y, heading_angle);
 
+last_food = 0; 
 for k=1:length(tvec) 
     
     [motorL, motorR] = brain(sensorL, sensorR, colorAll);
@@ -89,10 +93,17 @@ for k=1:length(tvec)
     
     DL = sqrt((x - f_center(1)).^2 + (y - f_center(2)).^2);
     
-    if DL < 10
-        tgt = [150*rand(1,2)-[75. 75.]];
+    if DL < 10 || k-last_food>100 % get new food after certain time, or after eating
+        last_food = k; % Timer 
+        tgt = [150*rand(1,2)-[75. 75.]]; % New food position
+        food_lambda = (750-380)*rand() + 380; % New food color 
+
         f_center = tgt;
-        set(food,'Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5]);
+        colorAll = color_sense(food_lambda); % New neural input 
+        colorAll
+        [R, G, B] = wavelength_to_RGB(food_lambda); 
+        
+        set(food,'Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5], 'EdgeColor', [R, G, B]);
     end
 end
 

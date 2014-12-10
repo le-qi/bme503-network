@@ -1,5 +1,6 @@
 %% Define parameters 
 clear 
+close all
 % Tuned neuron characteristics
 global width_factor
 global max_rate
@@ -9,12 +10,12 @@ max_rate = 20; %Hz
 
 % ANN settings 
 num_inputs = 4; % 4 tuned neurons
-num_hidden_units = 5; % minimum with good performance
+num_hidden_units = 10; % minimum with good performance
 num_outputs = 6;
 
 % Input layer characteristics:
 num_receptors = num_inputs; % Number of input layer neurons
-l_low = 390; l_high = 700; % nm; range based on human visual spectrum
+l_low = 380; l_high = 750; % nm; range based on human visual spectrum
 x = linspace(l_low, l_high, num_receptors+2);
 tune_l = x(2:end-1); % Tuned lambdas for receptors
 
