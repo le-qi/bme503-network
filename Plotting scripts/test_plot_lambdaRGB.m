@@ -1,6 +1,6 @@
 % This is a script that demonstrates the "wavelength_to_RGB" script, 
 % where there is a conversion from a scalar
-% to R, G, and B values. It visualizes the results in a handy figure.
+% to R, G, and B values. It visualizes the results in a handy figure. s
 
 % Michael Lee, Duke University, 12/9/2014
 
