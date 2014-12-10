@@ -39,14 +39,17 @@ yL = 5;
 
 % Compute the magnitude of the sensor info
 %    
-colorAll = color_sense(l); 
+l = 700; % nm; test
+colorAll = color_sense(l); % single sensor; senses one value 
+colorAll 
+
 sensorL = sqrt((xL - f_center(1)).^2 + (yL - f_center(2)).^2);
 sensorR = sqrt((xR - f_center(1)).^2 + (yR - f_center(2)).^2);
 draw_robot(x,y, heading_angle);
 
 for k=1:length(tvec) 
     
-    [motorL, motorR] = brain(sensorL, sensorR);
+    [motorL, motorR] = brain(sensorL, sensorR, colorAll);
 
     vel_left = motorL / 10;   % relate the left and right velocities to motor
                                 % outputs
@@ -164,15 +167,24 @@ width(c) = 2; color(c,:) = [1 1 0]; c=c+1;
 %--------------------------------------------------------------------------
 % end of robot_coords
 %--------------------------------------------------------------------------      
-function output = colorsense(lambda)
+function output = color_sense(lambda)
+    global tune_l
+    n1 = f(lambda, tune_l(1)); 
+    n2 = f(lambda, tune_l(2)); 
+    n3 = f(lambda, tune_l(3)); 
+    n4 = f(lambda, tune_l(4)); 
+    output = color_net([n1; n2; n3; n4;]); 
     
-    output = color_net([n1; n2; n3; n4;])
-    
-function [motorL, motorR] = brain(sensorL, sensorR)
+function [motorL, motorR] = brain(sensorL, sensorR, colorAll)
+  color_names = {'Violet', 'Blue', 'Green', 'Yellow', 'Orange', 'Red'}; % Categories, for reference
+  thresh = 0.5; % threshold for detection
   
-  % COWARD (uncomment for action)
-%   motorL = 250 - sensorL
-%   motorR = 250 - sensorR
+  % COWARD (uncomment for action); % coward if it detects red
+  if(colorAll(6)>thresh)
+   motorL = 250 - sensorL; 
+   motorR = 250 - sensorR; 
+   return
+  end
   
   % AGGRESSOR
   motorL = 250 - sensorR;   % compute a relationship of sensor input to motor output

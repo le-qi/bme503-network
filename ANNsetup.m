@@ -1,8 +1,9 @@
 %% Define parameters 
-
+clear 
 % Tuned neuron characteristics
 global width_factor
 global max_rate
+global tune_l
 width_factor = 30; % sigma in Guassian distribution 
 max_rate = 20; %Hz
 
@@ -19,7 +20,7 @@ tune_l = x(2:end-1); % Tuned lambdas for receptors
 
 % Output layer characteristics - just a reference, already hardcoded into
 % ann_MATLAB_toolbox.m
-color_names = {'Violet', 'Blue', 'Green', 'Yellow', 'Orange', 'Red'}; % Categories
+color_names = {'Violet', 'Blue', 'Green', 'Yellow', 'Orange', 'Red'}; % Categories, for reference
 color_ranges = [[380 450]; [450 495]; % Category definitions
     [495 570]; [570 590];
     [590 620]; [620 750]];
