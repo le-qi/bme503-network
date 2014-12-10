@@ -22,13 +22,13 @@ tvec = t:DT:tstop;
 tgt = [150*rand(1,2)-[75. 75.]]; %food target location
 
 %Make Food
-food_lambda = (750-380)*rand() + 380; % food color
+food_lambda = (680-380)*rand() + 380; % food color
 [R, G, B] = wavelength_to_RGB(food_lambda); % for the purposes of drawing
 
         
 f_center = tgt;
 f_width = 5;
-food = rectangle('Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5],'EdgeColor',[R, G, B]);
+food = rectangle('Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5],'EdgeColor',[R, G, B], 'LineWidth', 4);
 set(food,'Position',[f_center(1)-f_width(1)/2,f_center(2)-f_width(1)/2,f_width(1),f_width(1)],'Curvature',[0.5,0.5]);
 
 heading_angle=0;
@@ -55,9 +55,9 @@ for k=1:length(tvec)
     
     [motorL, motorR] = brain(sensorL, sensorR, colorAll);
 
-    vel_left = motorL / 10;   % relate the left and right velocities to motor
+    vel_left = motorL / 40;   % relate the left and right velocities to motor
                                 % outputs
-    vel_right = motorR / 10;
+    vel_right = motorR / 40;
     
     heading_angle = heading_angle + atan(((vel_right - vel_left)) / 10); % update heading angle and x,y location of robot
     
@@ -93,10 +93,11 @@ for k=1:length(tvec)
     
     DL = sqrt((x - f_center(1)).^2 + (y - f_center(2)).^2);
     
-    if DL < 10 || k-last_food>100 % get new food after certain time, or after eating
+    if DL < 10 || k-last_food>200 % get new food after certain time, or after eating
+
         last_food = k; % Timer 
         tgt = [150*rand(1,2)-[75. 75.]]; % New food position
-        food_lambda = (750-380)*rand() + 380; % New food color 
+        food_lambda = (680-380)*rand() + 380; % New food color 
 
         f_center = tgt;
         colorAll = color_sense(food_lambda); % New neural input 
@@ -194,12 +195,12 @@ function [motorL, motorR] = brain(sensorL, sensorR, colorAll)
   if(colorAll(6)>thresh)
    motorL = 250 - sensorL; 
    motorR = 250 - sensorR; 
+   title('Ahh!! Red', 'FontSize', 20)
+
    return
   end
   
   % AGGRESSOR
+  title('Yay, food.', 'FontSize', 12)
   motorL = 250 - sensorR;   % compute a relationship of sensor input to motor output
   motorR = 250 - sensorL;
-  
-
- 

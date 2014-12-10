@@ -16,7 +16,6 @@ out_model = [(l_model>380 & l_model<450);...
 %% Use MATLAB ANN toolbox
 close all
 net = fitnet(num_hidden_units); 
-view(net)
 
 x = in_model; 
 t = out_model; 
