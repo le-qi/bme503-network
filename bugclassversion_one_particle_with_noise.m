@@ -210,6 +210,34 @@ function [motorL, motorR] = brain(sensorL, sensorR, colorAll)
   end
   
   % Behaviour on detecting food - Aggressor
-  title('Yay!! Food.', 'FontSize', 16)
-  motorL = 300 - sensorR;   
-  motorR = 300 - sensorL;
+  % Different speeds for different colors
+  if (colorAll(5)>thresh)
+    motorL = 200 - sensorR;   
+    motorR = 200 - sensorL;
+    title('Yay!! Food.', 'FontSize', 16)
+  end
+  
+  if (colorAll(4)>thresh)
+    motorL = 350 - sensorR;   
+    motorR = 350 - sensorL;
+    title('Yay!! Food.', 'FontSize', 16)
+  end
+  
+  if (colorAll(3)>thresh)
+    motorL = 500 - sensorR;   
+    motorR = 500 - sensorL;
+    title('Yay!! Food.', 'FontSize', 16)
+  end
+  
+  if (colorAll(2)>thresh)
+    motorL = 400 - sensorR;   
+    motorR = 400 - sensorL;
+    title('Yay!! Food.', 'FontSize', 16)
+  end
+  
+  if (colorAll(1)>thresh)
+    motorL = 250 - sensorR;   
+    motorR = 250 - sensorL;
+    title('Yay!! Food.', 'FontSize', 16)
+  end
+  
