@@ -16,7 +16,7 @@ set(gca,'Visible','on');
 
 t = 0;
 DT=.1;
-tstop = 200;
+tstop = 300;
 tvec = t:DT:tstop;
 
 
@@ -119,7 +119,7 @@ for k=1:length(tvec)
     end
     
     % Creating red food at a new location after a certain time duration
-    if mod(k,500) == 0 
+    if mod(k,600) == 0 
         
         tgt = [150*rand(1,2)-[75. 75.]]; % New food position
         f_center(2,:) = tgt;
@@ -218,9 +218,9 @@ function [motorL, motorR] = brain(sensorL, sensorR, colorAll)
   if sensor_avg(1) > sensor_avg(2)
        if sensorL(2) < sensorR(2)
            motorL = 300 - sensorL(2); 
-           motorR = 290 - sensorR(2);
+           motorR = 300 - sensorR(2);
        else
-           motorL = 290 - sensorL(2); 
+           motorL = 300 - sensorL(2); 
            motorR = 300 - sensorR(2);
        end
        title('Get away from Red!!', 'FontSize', 16);

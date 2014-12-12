@@ -60,7 +60,7 @@ draw_robot() % show robot for the first time (no arguments)
 
 t = 0;
 DT=.1;
-tstop = 200;
+tstop = 300;
 tvec = t:DT:tstop;
 
 
@@ -96,8 +96,8 @@ for k=1:length(tvec)
     [motorL, motorR] = brain(sensorL, sensorR);
 
     %Compute left and right velocities
-    vel_left = motorL / 60;   
-    vel_right = motorR / 60;
+    vel_left = motorL / 50;   
+    vel_right = motorR / 50;
     
     heading_angle = heading_angle + atan(((vel_right - vel_left)) / 10); % update heading angle and x,y location of robot
     

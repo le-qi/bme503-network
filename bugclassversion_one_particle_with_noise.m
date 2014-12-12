@@ -16,7 +16,7 @@ set(gca,'Visible','on');
 
 t = 0;
 DT=.1;
-tstop = 200;
+tstop = 300;
 tvec = t:DT:tstop;
 
 
@@ -100,7 +100,7 @@ for k=1:length(tvec)
     
     %Get new food particle if eaten or
     %too much time has elapsed
-    if DL < 10 || (k-last_food>200 && colorAll(6)>0.5)
+    if DL < 10 || (k-last_food>400 && colorAll(6)>0.5)
         
         last_food = k; % Timer is updated 
         tgt = [150*rand(1,2)-[75. 75.]]; % New food position
