@@ -32,52 +32,24 @@ arena = figure(1);
 
 % Create points for the centers of cell along path - change as necessary to
 % make different paths
-points = [-50 75;
-    -50 50;
-    -50 25;
-    -50 0;
-    -25 0;
-    0 0;
+
+points = [0 0;
     25 0;
-    50 0;
+    50 0
     50 -25;
     50 -50;
-    50 -75];
-
-% points = [-50 -75;
-%     -50 -50;
-%     -50 -25;
-%     -50 0;
-%     -50 25;
-%     -25 25
-%     0 25;
-%     0 0;
-%     0 -25;
-%     25 -25;
-%     50 -25;
-%     50 -0;
-%     50 25;
-%     50 50;
-%     50 75];
-
-% points = [0 0;
-%     25 0;
-%     50 0
-%     50 -25;
-%     50 -50;
-%     25 -50
-%     0 -50;
-%     -25 -50;
-%     -50 -50;
-%     -50 -25;
-%     -50 0;
-%     -50 25;
-%     -50 50;
-%     -25 50;
-%     0 50;
-%     25 50;
-%     50 50;
-% ];
+    25 -50
+    0 -50;
+    -25 -50;
+    -50 -50;
+    -50 -25;
+    -50 0;
+    -50 25;
+    -50 50;
+    -25 50;
+    0 50;
+    25 50;
+    50 50;];
 
 % Code actually generates patches and displays them on plot
 for i = 1:length(points)
@@ -302,10 +274,3 @@ function [motorL, motorR] = brain(sensorL, sensorR)
       motorL = 250 - 150*sensorR(6);
       motorR = 250 - 150*sensorL(6);
   end
-  
-
-  
-  
-  
-  
- 
